@@ -7,7 +7,6 @@ import styles from './header.module.scss';
 
 const Header: React.FC<{}> = () => {
   const { pathname } = useLocation();
-  console.log(pathname);
   const addContact = () => {
     console.log('add');
   };
@@ -27,7 +26,6 @@ const Header: React.FC<{}> = () => {
             <Button name="Add Contact" className="primary" action={addContact} />
           )
         }
-        ;
     </div>
   );
 };

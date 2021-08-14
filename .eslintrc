@@ -54,6 +54,9 @@
       "operator-linebreak": "off",
       "prettier/prettier": 0 ,
       "no-use-before-define": "off",
-      "@typescript-eslint/ban-types": "off"
+      "@typescript-eslint/ban-types": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "camelcase": "off",
+      "react/jsx-props-no-spreading": "off"
   }
 }
