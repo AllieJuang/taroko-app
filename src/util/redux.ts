@@ -2,8 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ActionCreatorsMapObject, bindActionCreators } from 'redux';
 import { State } from '../redux/root-reducer';
 
-
-
 type Selector<ReturnState> = (s: State) => ReturnState;
 
 interface Option {

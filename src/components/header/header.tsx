@@ -9,9 +9,8 @@ const Header: React.FC<{}> = () => {
   const { pathname } = useLocation();
   console.log(pathname);
   const addContact = () => {
-    console.log('add')
-  }
-  
+    console.log('add');
+  };
   return (
     <div className={styles.header}>
       <div>
@@ -28,8 +27,9 @@ const Header: React.FC<{}> = () => {
             <Button name="Add Contact" className="primary" action={addContact} />
           )
         }
+        ;
     </div>
   );
-}
+};
 
 export default Header;

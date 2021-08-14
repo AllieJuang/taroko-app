@@ -10,12 +10,11 @@ const ContactList: React.FC<{}> = () => {
   }, []);
 
   useEffect(() => {
-    console.log(contacts)
+    console.log(contacts);
   }, [contacts]);
-  
   return (
     <h1>ContactList</h1>
-  )
+  );
 };
 
 export default ContactList;

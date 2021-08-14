@@ -1,0 +1,59 @@
+{
+  "env": {
+      "browser": true,
+      "commonjs": true,
+      "es6": true,
+  },
+  "extends": [
+    "airbnb",
+		"plugin:prettier/recommended",
+		"plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+	"plugins": [
+		"import",
+		"react",
+		"react-hooks",
+		"@typescript-eslint"
+	],
+  "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+      "ecmaFeatures": {
+          "jsx": true,
+          "experimentalObjectRestSpread": true
+      },
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+  },
+  "settings": {
+      "react": {
+          "version": "detect"
+      }
+  },
+  "rules": {
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+      "react/display-name": 1,
+      "import/no-unresolved": "off",
+      "import/extensions": "off",
+      "no-multiple-empty-lines": "off",
+      "no-tabs": "off",
+      "indent": "off",
+      "react/prop-types": "off",
+      "react/jsx-indent-props": "off",
+      "react/jsx-indent": "off",
+      "import/prefer-default-export": "off",
+      "react-hooks/exhaustive-deps": "off",
+      "object-curly-newline": "off",
+      "no-undef": "off",
+      "eol-last": "off",
+      "operator-linebreak": "off",
+      "prettier/prettier": 0 ,
+      "no-use-before-define": "off",
+      "@typescript-eslint/ban-types": "off"
+  }
+}

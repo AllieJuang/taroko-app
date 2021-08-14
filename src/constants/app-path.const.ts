@@ -1,4 +1,4 @@
 export const AppPath = {
-  home: '/',
-  contacts: '/contacts',
-}
+	home: '/',
+	contacts: '/contacts',
+};
