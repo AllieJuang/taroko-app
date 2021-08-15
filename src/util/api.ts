@@ -10,7 +10,7 @@ export const generateUrl = (path: string, params?: object) => {
 	return URL;
 };
 
-type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
+type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
 export const wrapFetch = async (
 	path: string,

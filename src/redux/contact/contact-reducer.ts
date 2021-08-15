@@ -47,12 +47,14 @@ const mockData = [
 
 export interface State {
 	contacts: ContactCardProperty[];
+	doFetch: boolean;
 	contactsLoading: boolean;
 	loading: boolean;
 }
 
 const initialState: State = {
 	contacts: [],
+	doFetch: false,
 	contactsLoading: false,
 	loading: false,
 };
@@ -67,23 +69,17 @@ export const getContacts = createAction(ContractActionType.GET_CONTACTS, () => a
 
 export const addContact = createAction(ContractActionType.ADD_CONTACT, (contactInfo: ContactCardProperty) => async (dispatch: Dispatch<any>) => {
 	const { statusCode, message } = await wrapFetch('api/contacts', 'POST', { headers: {}},  contactInfo);
-	if (statusCode === 201) {
-		dispatch(getContacts());
-	}
+	return statusCode === 201;
 });
 
 export const deleteContact = createAction(ContractActionType.DELETE_CONTACT, (id: string) => async (dispatch: Dispatch<any>) => {
 	const { statusCode, message } = await wrapFetch('api/contacts', 'DELETE', { headers: {}},  {id});
-	if (statusCode === 200) {
-		dispatch(getContacts());
-	}
+	return statusCode === 200;
 });
 
-export const updateContact = createAction(ContractActionType.UPDATE_CONTACT, (contactInfo: ContactCardProperty) => async (dispatch: Dispatch<any>) => {
-	const { statusCode, message } = await wrapFetch('api/contacts', 'PUT', { headers: {}},  contactInfo);
-	if (statusCode === 200) {
-		dispatch(getContacts());
-	}
+export const updateContact = createAction(ContractActionType.UPDATE_CONTACT, (id: string, contactInfo: ContactCardProperty) => async (dispatch: Dispatch<any>) => {
+	const { statusCode, message } = await wrapFetch(`api/contacts/${id}`, 'PATCH', { headers: {}},  { info: contactInfo });
+	return statusCode === 201;
 });
 
 export const reducer = {
@@ -110,36 +106,42 @@ export const reducer = {
 				...state,
 				loading: true,
 			}),
-			ADD_CONTACT_FULFILLED: (state: State) => ({
+			ADD_CONTACT_FULFILLED: (state: State, action: Action<boolean>) => ({
 				...state,
+				doFetch: action.payload,
 				loading: false,
 			}),
 			ADD_CONTACT_REJECTED: (state: State) => ({
 				...state,
+				doFetch: false,
 				loading: false,
 			}),
 			DELETE_CONTACT_PENDING: (state: State) => ({
 				...state,
 				loading: true,
 			}),
-			DELETE_CONTACT_FULFILLED: (state: State) => ({
+			DELETE_CONTACT_FULFILLED: (state: State, action: Action<boolean>) => ({
 				...state,
+				doFetch: action.payload,
 				loading: false,
 			}),
 			DELETE_CONTACT_REJECTED: (state: State) => ({
 				...state,
+				doFetch: false,
 				loading: false,
 			}),
 			UPDATE_CONTACT_PENDING: (state: State) => ({
 				...state,
 				loading: true,
 			}),
-			UPDATE_CONTACT_FULFILLED: (state: State) => ({
+			UPDATE_CONTACT_FULFILLED: (state: State, action: Action<boolean>) => ({
 				...state,
+				doFetch: action.payload,
 				loading: false,
 			}),
 			UPDATE_CONTACT_REJECTED: (state: State) => ({
 				...state,
+				doFetch: false,
 				loading: false,
 			}),
 		},

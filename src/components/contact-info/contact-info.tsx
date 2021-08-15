@@ -67,7 +67,7 @@ const ContactInfo: React.FC<ContactInfoProperty> = (
     }
 
     if (id !== undefined) {
-      updateContact({...params, id })
+      updateContact(id, params)
     } else {
       addContact(params);
     }
