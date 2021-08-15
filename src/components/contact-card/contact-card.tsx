@@ -5,7 +5,7 @@ import { useMedia } from '../../util/media';
 import Button from '../button/button';
 import styles from './contact-card.module.scss';
 
-interface ContactCardProperty {
+export interface ContactCardProperty {
   id: string;
   first_name: string;
   last_name: string;

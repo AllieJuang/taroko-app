@@ -1,11 +1,12 @@
 import { Action, createAction, handleActions } from 'redux-actions';
+import { ContactCardProperty } from '../../components/contact-card/contact-card';
 import { wrapFetch } from '../../util/api';
 import { useRedux } from '../../util/redux';
 import { State as GlobalState } from '../root-reducer';
 import { ContractActionType } from './contact-action-type';
 
 export interface State {
-	contacts: any[];
+	contacts: ContactCardProperty[];
 	loading: boolean;
 }
 
@@ -29,7 +30,7 @@ export const reducer = {
 				...state,
 				loading: true,
 			}),
-			GET_CONTACTS_FULFILLED: (state: State, action: Action<any[]>) => ({
+			GET_CONTACTS_FULFILLED: (state: State, action: Action<ContactCardProperty[]>) => ({
 				...state,
 				contacts: action.payload,
 				loading: false,
