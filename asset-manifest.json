@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/taroko-app/static/css/main.f88c880e.chunk.css",
-    "main.js": "/taroko-app/static/js/main.9de72157.chunk.js",
-    "main.js.map": "/taroko-app/static/js/main.9de72157.chunk.js.map",
+    "main.js": "/taroko-app/static/js/main.cbc3560c.chunk.js",
+    "main.js.map": "/taroko-app/static/js/main.cbc3560c.chunk.js.map",
     "runtime-main.js": "/taroko-app/static/js/runtime-main.7867e894.js",
     "runtime-main.js.map": "/taroko-app/static/js/runtime-main.7867e894.js.map",
     "static/js/2.c476b012.chunk.js": "/taroko-app/static/js/2.c476b012.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.7867e894.js",
     "static/js/2.c476b012.chunk.js",
     "static/css/main.f88c880e.chunk.css",
-    "static/js/main.9de72157.chunk.js"
+    "static/js/main.cbc3560c.chunk.js"
   ]
 }
