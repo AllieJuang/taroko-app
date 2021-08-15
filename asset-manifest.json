@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/taroko-app/static/css/main.bf938906.chunk.css",
-    "main.js": "/taroko-app/static/js/main.d697874d.chunk.js",
-    "main.js.map": "/taroko-app/static/js/main.d697874d.chunk.js.map",
-    "runtime-main.js": "/taroko-app/static/js/runtime-main.1891c725.js",
-    "runtime-main.js.map": "/taroko-app/static/js/runtime-main.1891c725.js.map",
-    "static/js/2.ee743960.chunk.js": "/taroko-app/static/js/2.ee743960.chunk.js",
-    "static/js/2.ee743960.chunk.js.map": "/taroko-app/static/js/2.ee743960.chunk.js.map",
-    "static/js/3.2ee8fb83.chunk.js": "/taroko-app/static/js/3.2ee8fb83.chunk.js",
-    "static/js/3.2ee8fb83.chunk.js.map": "/taroko-app/static/js/3.2ee8fb83.chunk.js.map",
+    "main.css": "/taroko-app/static/css/main.f88c880e.chunk.css",
+    "main.js": "/taroko-app/static/js/main.9de72157.chunk.js",
+    "main.js.map": "/taroko-app/static/js/main.9de72157.chunk.js.map",
+    "runtime-main.js": "/taroko-app/static/js/runtime-main.7867e894.js",
+    "runtime-main.js.map": "/taroko-app/static/js/runtime-main.7867e894.js.map",
+    "static/js/2.c476b012.chunk.js": "/taroko-app/static/js/2.c476b012.chunk.js",
+    "static/js/2.c476b012.chunk.js.map": "/taroko-app/static/js/2.c476b012.chunk.js.map",
+    "static/js/3.c2f8af07.chunk.js": "/taroko-app/static/js/3.c2f8af07.chunk.js",
+    "static/js/3.c2f8af07.chunk.js.map": "/taroko-app/static/js/3.c2f8af07.chunk.js.map",
     "index.html": "/taroko-app/index.html",
-    "static/css/main.bf938906.chunk.css.map": "/taroko-app/static/css/main.bf938906.chunk.css.map",
-    "static/js/2.ee743960.chunk.js.LICENSE.txt": "/taroko-app/static/js/2.ee743960.chunk.js.LICENSE.txt"
+    "static/css/main.f88c880e.chunk.css.map": "/taroko-app/static/css/main.f88c880e.chunk.css.map",
+    "static/js/2.c476b012.chunk.js.LICENSE.txt": "/taroko-app/static/js/2.c476b012.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.1891c725.js",
-    "static/js/2.ee743960.chunk.js",
-    "static/css/main.bf938906.chunk.css",
-    "static/js/main.d697874d.chunk.js"
+    "static/js/runtime-main.7867e894.js",
+    "static/js/2.c476b012.chunk.js",
+    "static/css/main.f88c880e.chunk.css",
+    "static/js/main.9de72157.chunk.js"
   ]
 }
