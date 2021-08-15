@@ -11,7 +11,7 @@ const Header: React.FC<{}> = () => {
   const { pathname } = useLocation();
   const modalRef = useRef(null);
   
-  const addContact = () => {
+  const openContactModal = () => {
     if (modalRef.current) {
 			(modalRef.current as any).open();
 		}
@@ -29,7 +29,7 @@ const Header: React.FC<{}> = () => {
       </div>
         {
           pathname === AppPath.contacts && (
-            <Button name="Add Contact" className="primary" action={addContact} />
+            <Button name="Add Contact" className="primary" action={openContactModal} />
           )
         }
       <Modal ref={modalRef}>

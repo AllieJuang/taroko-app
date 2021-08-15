@@ -23,7 +23,6 @@ type useFormBuilderFunc = <T>(
 	(key: string, value: FormFieldValue, error?: FormError) => void,
 	(value: T) => void,
 	(formEl: React.RefObject<HTMLFormElement>) => void,
-	(form: { [key: string]: FormFieldObject }) => FormRawData,
 ];
 
 export const useFormBuilder: useFormBuilderFunc = <T>(initialData: T) => {
@@ -45,13 +44,5 @@ export const useFormBuilder: useFormBuilderFunc = <T>(initialData: T) => {
 		}
 	};
 
-	const getRawData = (form: { [key: string]: FormFieldObject }) => {
-		return Object.keys(form)
-			.map(k => {
-				return { [k]: form[k].value as unknown };
-			})
-			.reduce((pre, curr) => ({ ...pre, ...curr }));
-	};
-
-	return [formObject, handleFormField, updateFormValue, makeFormAsTouched, getRawData];
+	return [formObject, handleFormField, updateFormValue, makeFormAsTouched];
 };

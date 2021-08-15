@@ -1,16 +1,18 @@
 import classnames from 'classnames';
 import React, { useRef } from 'react';
+import { useContact } from '../../redux/contact/contact-reducer';
 import { FormFieldObject, useFormBuilder } from '../../util/form';
 import Button from '../button/button';
+import { ContactCardProperty } from '../contact-card/contact-card';
 import FormField from '../form-field/form-field';
 import InputText from '../input-text/input-text';
 import styles from './contact-info.module.scss';
 
-interface ContactInfo {
-  [key: string]: FormFieldObject;
+interface ContactInfo<T> {
+  [key: string]: T;
 }
 
-const initialData: ContactInfo = {
+const initialData: ContactInfo<FormFieldObject> = {
 	firstName: { value: '', error: null },
 	lastName: { value: '', error: null },
   job: { value: '', error: null },
@@ -23,7 +25,8 @@ interface ContactInfoProperty {
 
 
 const ContactInfo: React.FC<ContactInfoProperty> = ({close = () => {},}) => {
-  const [formObject, handleFormField, updateFormValue] = useFormBuilder<ContactInfo>(
+  const [{ loading }, { addContact }] = useContact();
+  const [formObject, handleFormField] = useFormBuilder<ContactInfo<FormFieldObject>>(
 		initialData,
 	);
 	const formRef = useRef<HTMLFormElement | null>(null);
@@ -36,6 +39,24 @@ const ContactInfo: React.FC<ContactInfoProperty> = ({close = () => {},}) => {
 				input.blur();
 			});
 		}
+
+    const invalid = Object.keys(formObject).map(key => formObject[key].error).some(err => err);
+    if (invalid) {
+      return;
+    }
+    
+    const formVal = Object.keys(formObject).map(
+        key => ({[key]: formObject[key].value})
+      ).reduce((pre, curr) => ({ ...pre, ...curr }));
+    const { firstName, lastName, job, description } = formVal as ContactInfo<string>;
+    const params: ContactCardProperty = {
+      first_name: firstName,
+      last_name: lastName,
+      job,
+      description,
+    }
+
+    addContact(params);
   }
   
   return (

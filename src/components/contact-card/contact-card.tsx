@@ -6,7 +6,7 @@ import Button from '../button/button';
 import styles from './contact-card.module.scss';
 
 export interface ContactCardProperty {
-  id: string;
+  id?: string;
   first_name: string;
   last_name: string;
   job: string;
