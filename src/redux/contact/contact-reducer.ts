@@ -9,11 +9,21 @@ import { ContractActionType } from './contact-action-type';
 
 export interface State {
 	contacts: ContactCardProperty[];
+	contactsLoading: boolean;
 	loading: boolean;
 }
 
 const initialState: State = {
-	contacts: [],
+	contacts: [
+		// {
+		// 	id: '1',
+		// 	first_name: 'AAAAA',
+		// 	last_name: 'bbbbb',
+		// 	job: 'ccccc',
+		// 	description: 'aaaaa',
+		// }
+	],
+	contactsLoading: false,
 	loading: false,
 };
 
@@ -30,9 +40,20 @@ export const addContact = createAction(ContractActionType.ADD_CONTACT, (contactI
 	if (statusCode === 201) {
 		dispatch(getContacts());
 	}
-	// if (message) {
-	// 	alert(message);
-	// }
+});
+
+export const deleteContact = createAction(ContractActionType.DELETE_CONTACT, (id: string) => async (dispatch: Dispatch<any>) => {
+	const { statusCode, message } = await wrapFetch('api/contacts', 'DELETE', { headers: {}},  {id});
+	if (statusCode === 200) {
+		dispatch(getContacts());
+	}
+});
+
+export const updateContact = createAction(ContractActionType.UPDATE_CONTACT, (contactInfo: ContactCardProperty) => async (dispatch: Dispatch<any>) => {
+	const { statusCode, message } = await wrapFetch('api/contacts', 'PUT', { headers: {}},  contactInfo);
+	if (statusCode === 200) {
+		dispatch(getContacts());
+	}
 });
 
 export const reducer = {
@@ -40,16 +61,16 @@ export const reducer = {
 		{
 			GET_CONTACTS_PENDING: (state: State) => ({
 				...state,
-				loading: true,
+				contactsLoading: true,
 			}),
 			GET_CONTACTS_FULFILLED: (state: State, action: Action<ContactCardProperty[]>) => ({
 				...state,
 				contacts: action.payload,
-				loading: false,
+				contactsLoading: false,
 			}),
 			GET_CONTACTS_REJECTED: (state: State) => ({
 				...state,
-				loading: false,
+				contactsLoading: false,
 			}),
 			ADD_CONTACT_PENDING: (state: State) => ({
 				...state,
@@ -63,6 +84,30 @@ export const reducer = {
 				...state,
 				loading: false,
 			}),
+			DELETE_CONTACT_PENDING: (state: State) => ({
+				...state,
+				loading: true,
+			}),
+			DELETE_CONTACT_FULFILLED: (state: State) => ({
+				...state,
+				loading: false,
+			}),
+			DELETE_CONTACT_REJECTED: (state: State) => ({
+				...state,
+				loading: false,
+			}),
+			UPDATE_CONTACT_PENDING: (state: State) => ({
+				...state,
+				loading: true,
+			}),
+			UPDATE_CONTACT_FULFILLED: (state: State) => ({
+				...state,
+				loading: false,
+			}),
+			UPDATE_CONTACT_REJECTED: (state: State) => ({
+				...state,
+				loading: false,
+			}),
 		},
 		initialState,
 	),
@@ -73,6 +118,8 @@ const mapHooksToState = (state: GlobalState) => state.contact;
 const contactActionMap = {
 	getContacts,
 	addContact,
+	deleteContact,
+	updateContact,
 };
 
 export const useContact = () => useRedux(mapHooksToState, contactActionMap);

@@ -1,8 +1,11 @@
 import { faEdit, faTrash, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useRef } from 'react';
+import { useContact } from '../../redux/contact/contact-reducer';
 import { useMedia } from '../../util/media';
 import Button from '../button/button';
+import ContactInfo from '../contact-info/contact-info';
+import Modal from '../modal/modal';
 import styles from './contact-card.module.scss';
 
 export interface ContactCardProperty {
@@ -14,7 +17,16 @@ export interface ContactCardProperty {
 }
 
 const ContactCard: React.FC<ContactCardProperty> = ({ id, first_name, last_name, job, description }) => {
+  const [{ loading }, { deleteContact }] = useContact();
   const media = useMedia();
+
+  const modalRef = useRef(null);
+  
+  const openContactModal = () => {
+    if (modalRef.current) {
+			(modalRef.current as any).open();
+		}
+  };
 
   return (
     <div className={styles.contactCard}>
@@ -35,16 +47,29 @@ const ContactCard: React.FC<ContactCardProperty> = ({ id, first_name, last_name,
       <div className={styles.btns}>
         {media !== 'mobile' ? (
           <>
-            <Button name="Edit" className="primary" action={() => console.log('123')} />
-            <Button name="Delete" className="secondary" action={() => console.log('123')} />
+            <Button name="Edit" className="primary" action={() => openContactModal()} />
+            <Button name="Delete" className="secondary" action={() => deleteContact(id)} />
           </>
         ) : (
           <>
-            <FontAwesomeIcon icon={faEdit} />
-            <FontAwesomeIcon icon={faTrash} />
+            <FontAwesomeIcon icon={faEdit}  onClick={() => openContactModal()} />
+            <FontAwesomeIcon icon={faTrash} onClick={() => deleteContact(id)} />
           </>
         )}
       </div>
+      <Modal ref={modalRef}>
+				<ContactInfo 
+          id={id} 
+          firstName={first_name} 
+          lastName={last_name} 
+          job={job} 
+          description={description} 
+          close={() => {
+            if (modalRef.current) {
+              (modalRef.current as any).close();
+            }
+        }} />
+			</Modal>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useContact } from '../../redux/contact/contact-reducer';
 import { FormFieldObject, useFormBuilder } from '../../util/form';
 import Button from '../button/button';
@@ -20,13 +20,23 @@ const initialData: ContactInfo<FormFieldObject> = {
 };
 
 interface ContactInfoProperty {
-  close?: () => void;
+  id?: string;
+  firstName?: string;
+  lastName?: string;
+  job?: string;
+  description?: string;
+  close: () => void;
 }
 
 
-const ContactInfo: React.FC<ContactInfoProperty> = ({close = () => {},}) => {
-  const [{ loading }, { addContact }] = useContact();
-  const [formObject, handleFormField] = useFormBuilder<ContactInfo<FormFieldObject>>(
+const ContactInfo: React.FC<ContactInfoProperty> = (
+  {
+    id, firstName, lastName, job, description,
+    close = () => {},
+  }
+) => {
+  const [{ loading }, { addContact, updateContact }] = useContact();
+  const [formObject, handleFormField, updateFormValue] = useFormBuilder<ContactInfo<FormFieldObject>>(
 		initialData,
 	);
 	const formRef = useRef<HTMLFormElement | null>(null);
@@ -56,8 +66,26 @@ const ContactInfo: React.FC<ContactInfoProperty> = ({close = () => {},}) => {
       description,
     }
 
-    addContact(params);
+    if (id !== undefined) {
+      updateContact({...params, id })
+    } else {
+      addContact(params);
+    }
   }
+
+  useEffect(() => {
+    if (id !== undefined) {
+      updateFormValue(
+        {
+          firstName: { value: firstName || '', error: null },
+          lastName: { value: lastName || '', error: null },
+          job: { value: job || '', error: null },
+          description: { value: description || '', error: null },
+        }
+      )
+    }
+
+  }, [id]);
   
   return (
     <div className={classnames(styles.contactInfo)}>
@@ -95,7 +123,7 @@ const ContactInfo: React.FC<ContactInfoProperty> = ({close = () => {},}) => {
           />
         </FormField>
         <div className={classnames(styles.btns)}>
-        <Button name="Cancel" className="secondary" action={close} />
+          <Button name="Cancel" className="secondary" action={close} />
 					<Button name="Submit" className="primary" action={submit} />
 				</div>
       </form>

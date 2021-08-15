@@ -8,7 +8,7 @@ import styles from './contact-list.module.scss';
 type sortType = 'ASC' | 'DESC'
 
 const ContactList: React.FC<{}> = () => {
-  const [{ loading, contacts }, { getContacts }] = useContact();
+  const [{ contactsLoading:loading, contacts }, { getContacts }] = useContact();
   const [sort, setSort] = useState<sortType>('ASC');
   const sortedContacts = useMemo(() => contacts.sort(
     (a, b) => sort === 'ASC' ? 
@@ -17,6 +17,7 @@ const ContactList: React.FC<{}> = () => {
   ), [sort, contacts]);
 
   useEffect(() => {
+    console.log(123)
     getContacts();
   }, []);
 
