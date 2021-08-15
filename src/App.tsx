@@ -1,5 +1,6 @@
 import { Route, Switch } from 'react-router-dom';
 import Header from './components/header/header';
+import { AppPath } from './constants/app-path.const';
 import ContactList from './pages/contact-list/contact-list';
 import Home from './pages/home/home';
 
@@ -10,10 +11,10 @@ function App() {
     <div className="App">
       <Header />
       <Switch>
-        <Route exact path="/">
+        <Route exact path={AppPath.home}>
           <Home />
         </Route>
-        <Route path="/contacts">
+        <Route path={AppPath.contacts}>
           <ContactList />
         </Route>
       </Switch>
