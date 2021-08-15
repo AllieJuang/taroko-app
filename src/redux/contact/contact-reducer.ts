@@ -73,7 +73,7 @@ export const addContact = createAction(ContractActionType.ADD_CONTACT, (contactI
 });
 
 export const deleteContact = createAction(ContractActionType.DELETE_CONTACT, (id: string) => async (dispatch: Dispatch<any>) => {
-	const { statusCode, message } = await wrapFetch('api/contacts', 'DELETE', { headers: {}},  {id});
+	const { statusCode, message } = await wrapFetch(`api/contacts/${id}`, 'DELETE');
 	return statusCode === 200;
 });
 
