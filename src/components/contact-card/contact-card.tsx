@@ -1,6 +1,8 @@
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { useMedia } from '../../util/media';
+import Button from '../button/button';
 import styles from './contact-card.module.scss';
 
 interface ContactCardProperty {
@@ -12,6 +14,8 @@ interface ContactCardProperty {
 }
 
 const ContactCard: React.FC<ContactCardProperty> = ({ id, first_name, last_name, job, description }) => {
+  const media = useMedia();
+
   return (
     <div className={styles.contactCard}>
       <div className={styles.user}>
@@ -28,6 +32,19 @@ const ContactCard: React.FC<ContactCardProperty> = ({ id, first_name, last_name,
           <span className={styles.value}>{ description }</span>
         </li>
       </ul>
+      <div className={styles.btns}>
+        {media !== 'mobile' ? (
+          <>
+            <Button name="Edit" className="primary" action={() => console.log('123')} />
+            <Button name="Delete" className="secondary" action={() => console.log('123')} />
+          </>
+        ) : (
+          <>
+            <FontAwesomeIcon icon={faEdit} />
+            <FontAwesomeIcon icon={faTrash} />
+          </>
+        )}
+      </div>
     </div>
   );
 };

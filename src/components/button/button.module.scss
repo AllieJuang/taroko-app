@@ -20,6 +20,11 @@
 		color: steelblue;
 		border: 1px solid steelblue;
 		background-color: #fff;
+
+		&:hover {
+			color: darkcyan;
+			border-color: darkcyan;
+		}
 	}
 
 	&:disabled {
