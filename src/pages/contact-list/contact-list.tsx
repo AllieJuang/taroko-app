@@ -8,7 +8,7 @@ import styles from './contact-list.module.scss';
 type sortType = 'ASC' | 'DESC'
 
 const ContactList: React.FC<{}> = () => {
-  const [{ contacts }, { getContacts }] = useContact();
+  const [{ loading, contacts }, { getContacts }] = useContact();
   const [sort, setSort] = useState<sortType>('ASC');
   const sortedContacts = useMemo(() => contacts.sort(
     (a, b) => sort === 'ASC' ? 
@@ -23,13 +23,19 @@ const ContactList: React.FC<{}> = () => {
   return (
     <div className={styles.contactList}>
       <h1>Contacts</h1>
-      <div className={styles.list}>
-        {sortedContacts.map(contact => <ContactCard key={contact.id} {...contact} />)}
-      </div>
-      <FontAwesomeIcon icon={ sort === 'ASC'? faSortAlphaDown : faSortAlphaUp } className={styles.sort} onClick={() => {
-        const action = sort === 'ASC' ? 'DESC' : 'ASC';
-        setSort(action);
-      }} />
+      {loading ? (
+        <div className={styles.loading}>Loading...</div>
+      ) : (
+        <>
+          <div className={styles.list}>
+            {sortedContacts.map(contact => <ContactCard key={contact.id} {...contact} />)}
+          </div>
+          <FontAwesomeIcon icon={ sort === 'ASC'? faSortAlphaDown : faSortAlphaUp } className={styles.sort} onClick={() => {
+            const action = sort === 'ASC' ? 'DESC' : 'ASC';
+            setSort(action);
+          }} />
+        </>
+      )}
     </div>
   );
 };

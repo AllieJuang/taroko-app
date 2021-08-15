@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { AppPath } from '../../constants/app-path.const';
 import Button from '../button/button';
+import ContactInfo from '../contact-info/contact-info';
+import Modal from '../modal/modal';
 import styles from './header.module.scss';
 
 
 const Header: React.FC<{}> = () => {
   const { pathname } = useLocation();
+  const modalRef = useRef(null);
+  
   const addContact = () => {
-    console.log('add');
+    if (modalRef.current) {
+			(modalRef.current as any).open();
+		}
   };
   return (
     <div className={styles.header}>
@@ -26,6 +32,13 @@ const Header: React.FC<{}> = () => {
             <Button name="Add Contact" className="primary" action={addContact} />
           )
         }
+      <Modal ref={modalRef}>
+				<ContactInfo close={() => {
+          if (modalRef.current) {
+            (modalRef.current as any).close();
+          }
+        }} />
+			</Modal>
     </div>
   );
 };

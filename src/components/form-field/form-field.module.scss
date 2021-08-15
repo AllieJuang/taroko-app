@@ -1,0 +1,18 @@
+.formField {
+	position: relative;
+	margin-bottom: 24px;
+
+	& > .label {
+		font-size: 14px;
+		line-height: 1.57;
+		letter-spacing: 0.4px;
+		color: #737373;
+		margin-bottom: 4px;
+
+		& > .required {
+			color: var(--primary);
+			margin-left: 2px;
+			font-weight: bold;
+		}
+	}
+}
