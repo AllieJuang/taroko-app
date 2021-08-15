@@ -6,6 +6,44 @@ import { useRedux } from '../../util/redux';
 import { State as GlobalState } from '../root-reducer';
 import { ContractActionType } from './contact-action-type';
 
+const mockData = [
+	{
+		id: '1',
+		first_name: 'Allie',
+		last_name: 'Juang',
+		job: 'Front-end Developer',
+		description: 'Front-end Developer',
+	},
+	{
+		id: '2',
+		first_name: 'Jack',
+		last_name: 'Hung',
+		job: 'Back-end Developer',
+		description: 'Back-end Developer',
+	},
+	{
+		id: '3',
+		first_name: 'Leo',
+		last_name: 'Lin',
+		job: 'QA Engineer',
+		description: 'QA Engineer',
+	},
+	{
+		id: '4',
+		first_name: 'Joe',
+		last_name: 'Chan',
+		job: 'PM',
+		description: 'PMPMPMPMPMPMPMPMPMPMPMPMPMPMPMPMPMPMPM',
+	},
+	{
+		id: '5',
+		first_name: 'Eva',
+		last_name: 'Chang',
+		job: 'PM',
+		description: 'PMPMPMPMPMPMPMPMPMPMPMPMPMPMPMPMPMPMPM',
+	}
+]
+
 
 export interface State {
 	contacts: ContactCardProperty[];
@@ -14,15 +52,7 @@ export interface State {
 }
 
 const initialState: State = {
-	contacts: [
-		// {
-		// 	id: '1',
-		// 	first_name: 'AAAAA',
-		// 	last_name: 'bbbbb',
-		// 	job: 'ccccc',
-		// 	description: 'aaaaa',
-		// }
-	],
+	contacts: [],
 	contactsLoading: false,
 	loading: false,
 };
@@ -68,10 +98,14 @@ export const reducer = {
 				contacts: action.payload,
 				contactsLoading: false,
 			}),
-			GET_CONTACTS_REJECTED: (state: State) => ({
-				...state,
-				contactsLoading: false,
-			}),
+			GET_CONTACTS_REJECTED: (state: State) => {
+				alert(`Server Error. So Display Mock Data`)
+				return {
+					...state,
+					contacts: mockData,
+					contactsLoading: false,
+				};
+			},
 			ADD_CONTACT_PENDING: (state: State) => ({
 				...state,
 				loading: true,

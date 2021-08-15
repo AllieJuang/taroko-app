@@ -31,6 +31,12 @@
       display: flex;
       padding: 5px 0;
 
+      span {
+        display: inline-block;
+        width: calc(100% - 110px);
+        word-wrap:break-word;
+      }
+
       .title {
         width: 100px;
         margin-right: 10px;
